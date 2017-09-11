@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Bio{% endblock %}
+{% block content %}
+<h1 class="portfolio-title">
+                BIO
+            </h1>
+            <div class="row bio">
+                <div class="bio-portrait">
+                    <img src="{{ portrait.url }}" alt="">
+                </div>
+                <div class="bio-title">
+                    <h1>Hugo Boulenger</h1>
+                    <h2>{{ subtitle }}</h2>
+                    <p>{{ presentation }}</p>
+                </div>
+            </div>
+{% endblock %}

@@ -30,7 +30,7 @@ SECRET_KEY = 'b925)kstvtd!ssdnx1%pa78kuh=pwf(0(zynyb#+pk47(^7e%#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bio',
 ]
 
 MIDDLEWARE = [
@@ -125,6 +126,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Where the statics files are located
-STATICFILES_DIR = {
-    os.path.join(BASE_DIR, 'static/'),
-}
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]

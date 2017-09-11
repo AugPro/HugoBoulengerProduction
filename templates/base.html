@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="{% static "css/style.css" %}">
+        <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css" %}">
+        <title>{% block title %}Default{% endblock %}</title>
+        {% endblock %}
+    </head>
+    <body>
+        <div class="container-fluid">
+            {% block nav %}
+            <div class="row">
+                <nav class="slideToggled">
+                    <a href="index.html">
+                        <div class="nav-img" style="background:url({% static "img/logo.png" %}) center center / contain no-repeat"></div>
+                    </a>
+                    <ul>
+                        <li class="wrap">Photos
+                            <ul class="sub-menu">
+                                <li><a href="adventure.html">Adventure</a></li>
+                                <div class="divider"></div>
+                                <li><a href="#">Landscape</a></li>
+                                <div class="divider"></div>
+                                <li><a href="#">Commercial</a></li>
+                            </ul>
+                        </li>
+                        <li class="wrap">Videos
+                            <ul class="sub-menu">
+                                <li><a href="film-trailers.html">Film trailers</a></li>
+                                <div class="divider"></div>
+                                <li><a href="#">Commercial videos</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li class="wrap">About
+                            <ul class="sub-menu">
+                                <li><a href="{% url "bio_home" %}">Bio</a></li>
+                                <div class="divider"></div>
+                                <li><a href="news.html">News</a></li>
+                            </ul>
+                        </li>
+                        <li class="wrap"> <span class="glyphicon glyphicon-plus ignored-plus" href="#"></span<>
+                            <ul class="sub-menu">
+                                <li><a href="subscribe.html">Subscribe</a></li>
+                                <div class="divider"></div>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="glyphicon glyphicon-search" href="#"></a>
+                        <input type="text" name="search"></li>
+                    </ul>
+                </nav>
+                <div class="slide-img nav-img" style="background:url({% static "img/logo.png" %}) center center / contain no-repeat"></div>
+                <div class="menu-toggler glyphicon glyphicon-home"></div>
+            </div>
+            {% endblock %}
+            {% block content %}
+            {% endblock %}
+            {% block footer %}
+            <div class="row footer">
+                <div class="col-sm-4">
+                    <div class="soc-container">
+                        <a href="#"><img class="social-img" src="{% static "img/bf.png" %}" alt=""></a>
+                        <a href="#"><img class="social-img" src="{% static "img/inst.png" %}" alt=""></a>
+                        <a href="#"><img class="social-img" src="{% static "img/tw.png" %}" alt=""></a>
+                        <a href="#"><img class="social-img" src="{% static "img/ty.png" %}" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-sm-offset-4 col-sm-4 copyrights">
+                    <span class="glyphicon glyphicon-copyright-mark"></span>
+                    Hugo Boulenger Production
+                </div>
+            </div>
+            {% endblock %}
+        </div>
+
+        {% block scripts %}
+        <script src="{% static "js/jquery-3.2.0.min.js" %}" charset="utf-8"></script>
+        <script src="{% static "bootstrap/js/bootstrap.min.js" %}" charset="utf-8"></script>
+        {% block classic-scripts %}
+        <script src="{% static "js/sub-menu.js" %}" charset="utf-8"></script>
+        <script src="{% static "js/search-bar.js" %}" charset="utf-8"></script>
+        <script src="{% static "js/slide-menu-logo.js" %}" charset="utf-8"></script>
+        <script src="{% static "js/manage_footer_nav.js" %}" charset="utf-8"></script>
+        {% endblock %}
+        {% block other-scripts %}
+        {% endblock %}
+        {% endblock %}
+    </body>
+</html>
