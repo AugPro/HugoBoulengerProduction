@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from . import models
 # Create your views here.
 def home(request):
-    bio = models.Bio.objects.get(active=True)
+    bio = get_object_or_404(models.Bio,active=True)
     portrait = bio.portrait
     subtitle = bio.subtitle
     presentation = bio.presentation
