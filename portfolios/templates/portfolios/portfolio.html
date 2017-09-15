@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <h1 class="portfolio-title">
+            {{ title }}
+        </h1>
+    </div>
+    <div class="row">
+        <ul class="portfolio">
+            {% for object in object_list %}
+            <li><a href="{% url 'portfolio_categorie_image' categorie=object.categorie index=object.index %}"><img data-src="{{object.image.image.url}}" width="{{object.image.image.width}}" height="{{object.image.image.height}}"></a></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+
+{% block other-scripts %}
+    <script src="js/slider.js" charset="utf-8"></script>
+    <script src="js/portfolio.js" charset="utf-8"></script>
+{% endblock %}

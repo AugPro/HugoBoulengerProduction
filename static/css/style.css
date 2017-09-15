@@ -888,16 +888,16 @@ h4.back-to-previous:hover{
     z-index:2;
 }
 
-#closing-button > button{
+#closing-button > a > button{
     text-shadow: none;
     opacity:0.5;
 }
 
-#closing-button > button:hover{
+#closing-button > a > button:hover{
     opacity:1;
 }
 
-#closing-button > button > span{
+#closing-button > a > button > span{
     font-size:3em;
     color: #B3B5BD;
 }
