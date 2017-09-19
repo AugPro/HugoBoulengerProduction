@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
@@ -10,13 +11,12 @@
     <div class="row">
         <ul class="portfolio">
             {% for object in object_list %}
-            <li><a href="{% url 'portfolio_categorie_image' categorie=object.categorie index=object.index %}"><img data-src="{{object.image.image.url}}" width="{{object.image.image.width}}" height="{{object.image.image.height}}"></a></li>
+            <li><a href="{% url 'portfolios_categorie_image' categorie=object.categorie.categorie index=object.index %}"><img data-src="{{object.image.ld.url}}" width="{{object.image.ld.width}}" height="{{object.image.ld.height}}"></a></li>
             {% endfor %}
         </ul>
     </div>
 {% endblock %}
 
 {% block other-scripts %}
-    <script src="js/slider.js" charset="utf-8"></script>
-    <script src="js/portfolio.js" charset="utf-8"></script>
+    <script src="{% static "js/portfolio.js" %}" charset="utf-8"></script>
 {% endblock %}

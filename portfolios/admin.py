@@ -10,8 +10,8 @@ class CategorieAdmin(admin.ModelAdmin):
         return models.Portfolio.objects.filter(categorie=cat).count()
 
 class PortfolioAdmin(admin.ModelAdmin):
-    
+    exclude = ['index']
+    list_display= ('__str__','index','id',)
 
 admin.site.register(models.Categorie, CategorieAdmin)
-admin.site.register(models.Portfolio)
-admin.site.register(models.Tempo)
+admin.site.register(models.Portfolio, PortfolioAdmin)

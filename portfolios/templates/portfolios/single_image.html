@@ -6,24 +6,24 @@
         <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css" %}">
         <link rel="stylesheet" href="{% static "css/style.css" %}">
         {% if buyable %}<link rel="stylesheet" href="{% static "css/cropper.css" %}">{% endif %}
-        <title>{% block title %}{{portfolio.image.titre}}{% endblock %}</title>
+        <title>{% block title %}{{portfolio.image.title}}{% endblock %}</title>
     </head>
     <body id="single-image-body">
         <div id="container">
             <div id="closing-button">
-                <a href="{% url "portfolio_categorie_all" categorie=portfolio.categorie %}">
+                <a href="{% url "portfolios_categorie_all" categorie=portfolio.categorie %}">
                     <button type="button" class="close" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </a>
             </div>
-            <a href="{% url "portfolio_categorie_image" categorie=portfolio.categorie index=index%}" >
+            <a href="{% url "portfolios_categorie_image" categorie=portfolio.categorie index=prev.index%}" >
                 <div id="left-block">
                     <span class=" glyphicon glyphicon-menu-left" aria-hidden="true"></span>
                 </div>
             </a>
             <div id="center-div">
-                <img class="img-responsive" src="{{portfolio.image.image.url}}">
+                <img class="img-responsive" src="{{portfolio.image.ld.url}}">
                 <div id='image-footer'>
                     <!-- LEFT FOOTER PART -->
                     <div >
@@ -39,7 +39,7 @@
                     </div>
                 </div>
             </div>
-            <a href="{% url "portfolio_categorie_image" categorie=portfolio.categorie index=index%}">
+            <a href="{% url "portfolios_categorie_image" categorie=portfolio.categorie index=next.index%}">
                 <div id="right-block">
                     <span class=" glyphicon glyphicon-menu-right" aria-hidden="true"></span>
                 </div>
@@ -61,7 +61,7 @@
                     <div class="modal-body row">
                         <div class="col-sm-9 row" id="cropping-area">
                             <div class="col-sm-11">
-                                <img src="{{portfolio.image.image.url}}" class="center-block" id="image">
+                                <img src="{{portfolio.image.ld.url}}" class="center-block" id="image">
                             </div>
                             <div class="actions hidden-xs" id="actions-sm"> <!-- hidden-xs -->
                                 <span>
