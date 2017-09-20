@@ -98,7 +98,7 @@
                                 <h2>Material Choice</h2>
                                 <ul id="material-list">
 
-                                    {% for material in obj.materials %}
+                                    {% for material in obj.materials.all %}
                                     <li class="material" onclick="menuOn('{{material}}')">
                                         {{material|title}}
                                         <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
@@ -108,16 +108,16 @@
                                 </ul>
                             </div>
 
-                            {% for material in obj.materials %}
+                            {% for material in obj.materials.all %}
                             <div class="size-menu" id="{{material}}">
                                 <h4 class="back-to-previous" onclick="menuOff('{{material}}')">
                                     <span class=" glyphicon glyphicon-menu-left" aria-hidden="true"></span> Materials
                                 </h4>
                                 <h2>Size Choice</h2>
                                 <ul>
-                                    {% for size in obj.materials.sizes %}
+                                    {% for size in material.sizes.all %}
                                     <li class="size" onclick="changeRatio({{size.width}}/{{size.height}})">
-                                        {{size.height}}{{unit}}x{{size.width}}{{unit}}
+                                        {{size.width}} x {{size.height}}  {{unit}}
                                     </li>
                                     {% endfor %}
                                 </ul>

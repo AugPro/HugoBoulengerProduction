@@ -1,0 +1,21 @@
+{% extends 'portfolios/portfolio.html' %}
+{% load static %}
+{% block title %}Shop{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <h1 class="portfolio-title">
+            Shop
+        </h1>
+        <h2 class="portfolio-subtitle">
+            <span class="glyphicon glyphicon-star-empty"></span>Best Sellers<span class="glyphicon glyphicon-star-empty"></span>
+        </h2>
+    </div>
+    <div class="row">
+        <ul class="portfolio">
+            {% for object in object_list %}
+            <li><a href="{% url 'shop_image' index=object.index %}"><img data-src="{{object.image.ld.url}}" width="{{object.image.ld.width}}" height="{{object.image.ld.height}}"></a></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

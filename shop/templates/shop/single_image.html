@@ -1,0 +1,14 @@
+{% extends 'portfolios/single_image.html' %}
+{% block title %}Shop-{{image.image.title}}{% endblock %}
+
+{% block close-url %}
+    {% url "shop_home" %}
+{% endblock %}
+
+{% block left-url %}
+    {% url "shop_image" index=prev.index%}
+{% endblock %}
+
+{% block right-url %}
+    {% url "shop_image" index=next.index%}
+{% endblock %}

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'portfolios',
     'videos',
     'news',
+    'shop',
 ]
 
 MIDDLEWARE = [
