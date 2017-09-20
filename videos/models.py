@@ -14,7 +14,7 @@ class Video(models.Model):
     categorie = models.ForeignKey(Categorie)
     url = models.URLField()
     key = models.TextField(unique=True)
-    title = models.TextField()
+    title = models.TextField(null=True)
     def __str__(self):
         return self.title
     def get_key(self,url):

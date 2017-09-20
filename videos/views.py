@@ -9,4 +9,5 @@ def home(request):
 def by_categorie(request,categorie):
     title = categorie
     object_list = get_list_or_404(models.Video,categorie__categorie = categorie)
+    list_len = len(object_list)
     return render(request,'videos/videos.html',locals())

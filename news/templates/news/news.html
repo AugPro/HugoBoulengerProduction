@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <h1 class="portfolio-title">
+        {{ title }}
+    </h1>
+    {% for object in object_list %}
+        <div class="row news">
+            <div class="col-sm-offset-2 col-sm-8">
+                <img class="news-img" src="{{ object.img.url }}">
+                <h1 class="news-title">{{ object.title}}</h1>
+                <a href="{{ object.url }}" class="news-link">{{object.url_txt}}</a>
+                <p class="news-content">{{ object.content}}</p>
+            </div>
+        </div>
+        {% if not forloop.last %}
+        <div class="news-divider"></div>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+    <div class="row news">
+        <div class="col-sm-offset-2 col-sm-8">
+            <img class="news-img" src="img/1.jpg">
+            <h1 class="news-title">SurfSession</h1>
+            <a href="http://www.surfsession.com/" class="news-link">http://www.surfsession.com/</a>
+            <p class="news-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+    </div>

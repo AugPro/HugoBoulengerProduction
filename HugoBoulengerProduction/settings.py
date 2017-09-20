@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'bio',
     'portfolios',
     'videos',
+    'news',
 ]
 
 MIDDLEWARE = [
