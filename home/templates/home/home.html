@@ -1,0 +1,23 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block title %}Hugo Boulenger{% endblock %}
+
+{% block content %}
+    <div class="row slider">
+        {% for image in info.images.all %}
+        <div style="background:url({{image.ld.url}}) no-repeat center center fixed">
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row big-text">
+        <div class="col-sm-12">
+            <h1>{{info.title}}</h1>
+            <h2>{{info.sub_title}}</h2>
+        </div>
+    </div>
+{% endblock %}
+
+{% block other-scripts %}
+<script src="{% static "js/slider.js" %}" charset="utf-8"></script>
+{% endblock %}

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'videos',
     'news',
     'shop',
+    'home',
 ]
 
 MIDDLEWARE = [

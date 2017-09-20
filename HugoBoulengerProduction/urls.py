@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^videos/', include('videos.urls')),
     url(r'^shop/', include('shop.urls')),
     url(r'^about/news/', include('news.urls')),
+    url(r'^', include('home.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
