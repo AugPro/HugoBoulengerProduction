@@ -3,7 +3,7 @@ from . import models
 
 # Create your views here.
 def home(request):
-    title = 'Portfolio'
+    title = 'Photos'
     object_list = models.Portfolio.objects.all()
     return render(request,'portfolios/portfolio.html', locals())
 
@@ -13,10 +13,17 @@ def categorie_all(request,categorie):
     return render(request,'portfolios/portfolio.html', locals())
 
 def categorie_image(request,categorie,index):
-    prev = (models.Portfolio.objects.order_by('-index').filter(categorie__categorie=categorie,index__lt=index)
-        or models.Portfolio.objects.order_by('-index'))[0]
-    next = (models.Portfolio.objects.order_by('index').filter(categorie__categorie= categorie,index__gt=index)
-        or models.Portfolio.objects.order_by('index'))[0]
+    prev = models.Portfolio.objects.filter(categorie__categorie=categorie).order_by('-index')
+    next = models.Portfolio.objects.filter(categorie__categorie=categorie).order_by('index')
+
+    if prev.filter(index__lt=index):
+        prev = prev.filter(index__lt=index)[0]
+    else:
+        prev = prev[0]
+    if next.filter(index__gt=index):
+        next = next.filter(index__gt=index)[0]
+    else:
+        next = next[0]
     buyable = False
-    portfolio = get_object_or_404(models.Portfolio, categorie__categorie=categorie, index=index)
+    obj = get_object_or_404(models.Portfolio, categorie__categorie=categorie, index=index)
     return render(request,'portfolios/single_image.html', locals())

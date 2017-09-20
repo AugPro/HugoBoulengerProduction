@@ -6,28 +6,32 @@
         <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css" %}">
         <link rel="stylesheet" href="{% static "css/style.css" %}">
         {% if buyable %}<link rel="stylesheet" href="{% static "css/cropper.css" %}">{% endif %}
-        <title>{% block title %}{{portfolio.image.title}}{% endblock %}</title>
+        <title>{% block title %}Display-{{obj.image.title}}{% endblock %}</title>
     </head>
     <body id="single-image-body">
         <div id="container">
             <div id="closing-button">
-                <a href="{% url "portfolios_categorie_all" categorie=portfolio.categorie %}">
+                <a href="{% block close-url %}
+                    {% url "portfolios_categorie_all" categorie=portfolio.categorie %}
+                {% endblock %}">
                     <button type="button" class="close" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </a>
             </div>
-            <a href="{% url "portfolios_categorie_image" categorie=portfolio.categorie index=prev.index%}" >
+            <a href="{% block left-url %}
+                {% url "portfolios_categorie_image" categorie=portfolio.categorie index=prev.index%}
+            {% endblock %}">
                 <div id="left-block">
                     <span class=" glyphicon glyphicon-menu-left" aria-hidden="true"></span>
                 </div>
             </a>
             <div id="center-div">
-                <img class="img-responsive" src="{{portfolio.image.ld.url}}">
+                <img class="img-responsive" src="{{obj.image.ld.url}}">
                 <div id='image-footer'>
                     <!-- LEFT FOOTER PART -->
                     <div >
-                        {{portfolio.image.title}}
+                        {{obj.image.title}}
                     </div>
                     <!-- RIGHT FOOTER PART -->
                     <div>
@@ -39,7 +43,9 @@
                     </div>
                 </div>
             </div>
-            <a href="{% url "portfolios_categorie_image" categorie=portfolio.categorie index=next.index%}">
+            <a href="{% block right-url %}
+                {% url "portfolios_categorie_image" categorie=portfolio.categorie index=next.index%}
+            {% endblock %}">
                 <div id="right-block">
                     <span class=" glyphicon glyphicon-menu-right" aria-hidden="true"></span>
                 </div>
@@ -61,7 +67,7 @@
                     <div class="modal-body row">
                         <div class="col-sm-9 row" id="cropping-area">
                             <div class="col-sm-11">
-                                <img src="{{portfolio.image.ld.url}}" class="center-block" id="image">
+                                <img src="{{obj.image.ld.url}}" class="center-block" id="image">
                             </div>
                             <div class="actions hidden-xs" id="actions-sm"> <!-- hidden-xs -->
                                 <span>
@@ -92,7 +98,7 @@
                                 <h2>Material Choice</h2>
                                 <ul id="material-list">
 
-                                    {% for material in materials %}
+                                    {% for material in obj.materials %}
                                     <li class="material" onclick="menuOn('{{material}}')">
                                         {{material|title}}
                                         <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
@@ -102,16 +108,16 @@
                                 </ul>
                             </div>
 
-                            {% for material in materials %}
+                            {% for material in obj.materials %}
                             <div class="size-menu" id="{{material}}">
                                 <h4 class="back-to-previous" onclick="menuOff('{{material}}')">
                                     <span class=" glyphicon glyphicon-menu-left" aria-hidden="true"></span> Materials
                                 </h4>
                                 <h2>Size Choice</h2>
                                 <ul>
-                                    {% for width,height in sizes %}
-                                    <li class="size" onclick="changeRatio({{width}}/{{height}})">
-                                        {{height}}{{unit}}x{{width}}{{unit}}
+                                    {% for size in obj.materials.sizes %}
+                                    <li class="size" onclick="changeRatio({{size.width}}/{{size.height}})">
+                                        {{size.height}}{{unit}}x{{size.width}}{{unit}}
                                     </li>
                                     {% endfor %}
                                 </ul>
