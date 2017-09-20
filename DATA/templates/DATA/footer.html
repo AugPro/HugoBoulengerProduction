@@ -1,0 +1,22 @@
+{% load static %}
+{% load format_socials %}
+{% format_socials as socials_list%}
+
+<div class="row footer">
+    <div class="col-sm-4">
+        <div class="soc-container">
+            {% for social in socials_list %}
+            {% if forloop.first %}
+            <a href="{{social.fb}}"><img class="social-img" src="{% static "img/bf.png" %}" ></a>
+            <a href="{{social.insta}}"><img class="social-img" src="{% static "img/inst.png" %}" ></a>
+            <a href="{{social.twitter}}"><img class="social-img" src="{% static "img/tw.png" %}" ></a>
+            <a href="{{social.yt}}"><img class="social-img" src="{% static "img/ty.png" %}" ></a>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-sm-offset-4 col-sm-4 copyrights">
+        <span class="glyphicon glyphicon-copyright-mark"></span>
+        Hugo Boulenger Production
+    </div>
+</div>

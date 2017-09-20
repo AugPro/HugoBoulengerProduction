@@ -19,3 +19,4 @@ class PhotoAdmin(admin.ModelAdmin):
     list_display= ['image_tag','title','date','tags_tag','key']
 admin.site.register(models.Photo, PhotoAdmin)
 admin.site.register(models.Tag)
+admin.site.register(models.Social)

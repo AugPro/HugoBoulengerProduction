@@ -27,3 +27,9 @@ class Photo(models.Model):
         while Photo.objects.filter(key=self.key).exists():
             self.key = get_random_string(length=16)
         super().save(*args, **kwargs)
+
+class Social(models.Model):
+    fb = models.URLField()
+    insta = models.URLField()
+    twitter= models.URLField()
+    yt = models.URLField()

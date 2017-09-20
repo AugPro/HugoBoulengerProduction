@@ -61,20 +61,7 @@
             {% block content %}
             {% endblock %}
             {% block footer %}
-            <div class="row footer">
-                <div class="col-sm-4">
-                    <div class="soc-container">
-                        <a href="#"><img class="social-img" src="{% static "img/bf.png" %}" alt=""></a>
-                        <a href="#"><img class="social-img" src="{% static "img/inst.png" %}" alt=""></a>
-                        <a href="#"><img class="social-img" src="{% static "img/tw.png" %}" alt=""></a>
-                        <a href="#"><img class="social-img" src="{% static "img/ty.png" %}" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-sm-offset-4 col-sm-4 copyrights">
-                    <span class="glyphicon glyphicon-copyright-mark"></span>
-                    Hugo Boulenger Production
-                </div>
-            </div>
+                {% include "DATA/footer.html" %}
             {% endblock %}
         </div>
 
