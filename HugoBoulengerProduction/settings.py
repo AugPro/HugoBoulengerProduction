@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'DATA',
     'bio',
     'portfolios',
+    'videos',
 ]
 
 MIDDLEWARE = [
@@ -130,4 +131,8 @@ STATIC_URL = '/static/'
 # Where the statics files are located
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
+]
+
+SCRIPTS_DIRS = [
+    os.path.join(BASE_DIR, 'scripts'),
 ]

@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^about/bio/', include('bio.urls')),
     url(r'^portfolio/', include('portfolios.urls')),
+    url(r'^videos/', include('videos.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

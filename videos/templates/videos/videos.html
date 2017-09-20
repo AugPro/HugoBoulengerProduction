@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <h1 class="portfolio-title">
+        {{ title }}
+    </h1>
+    {% for object in object_list %}
+    <div class="row videos">
+        <div class="col-sm-offset-2 col-sm-8">
+            <h2 class="contact-title video-title">{{ object.title }}</h2>
+            <div class="embedded-video"><iframe src="http://www.youtube.com/embed/{{object.key}}" frameborder="0" allowfullscreen></iframe></div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}
