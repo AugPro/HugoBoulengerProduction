@@ -1,0 +1,9 @@
+{% load static %}
+{% load photos_sub_menu %}
+{% photos_sub_menu as categories%}
+
+<ul class="sub-menu">
+    {% for categorie in categories %}
+    <li><a href="{% url 'portfolios_categorie_all' categorie.categorie %}">{{ categorie.categorie }}</a></li>
+    {% endfor %}
+</ul>

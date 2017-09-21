@@ -78,6 +78,7 @@ TEMPLATES = [
 
             'libraries':{
             'format_socials': 'DATA.templatetags.socials',
+            'photos_sub_menu': 'portfolios.templatetags.photos_sub_menu',
             }
 
         },

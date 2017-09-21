@@ -20,18 +20,11 @@
                     </a>
                     <ul>
                         <li class="wrap">Photos
-                            <ul class="sub-menu">
-                                <li><a href="adventure.html">Adventure</a></li>
-                                <div class="divider"></div>
-                                <li><a href="#">Landscape</a></li>
-                                <div class="divider"></div>
-                                <li><a href="#">Commercial</a></li>
-                            </ul>
+                            {% include "portfolios/photos_sub_menu.html" %}
                         </li>
                         <li class="wrap">Videos
                             <ul class="sub-menu">
                                 <li><a href="film-trailers.html">Film trailers</a></li>
-                                <div class="divider"></div>
                                 <li><a href="#">Commercial videos</a></li>
                             </ul>
                         </li>
@@ -39,14 +32,12 @@
                         <li class="wrap">About
                             <ul class="sub-menu">
                                 <li><a href="{% url "bio_home" %}">Bio</a></li>
-                                <div class="divider"></div>
                                 <li><a href="news.html">News</a></li>
                             </ul>
                         </li>
                         <li class="wrap"> <span class="glyphicon glyphicon-plus ignored-plus" href="#"></span<>
                             <ul class="sub-menu">
                                 <li><a href="subscribe.html">Subscribe</a></li>
-                                <div class="divider"></div>
                                 <li><a href="contact.html">Contact</a></li>
                             </ul>
                         </li>
