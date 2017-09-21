@@ -6,9 +6,9 @@
 {% endblock %}
 
 {% block left-url %}
-    {% url "shop_image" index=prev.index%}
+    {% url "shop_image" key=prev%}
 {% endblock %}
 
 {% block right-url %}
-    {% url "shop_image" index=next.index%}
+    {% url "shop_image" key=next%}
 {% endblock %}

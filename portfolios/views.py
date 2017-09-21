@@ -12,18 +12,21 @@ def categorie_all(request,categorie):
     object_list = get_list_or_404(models.Portfolio, categorie__categorie=categorie)
     return render(request,'portfolios/portfolio.html', locals())
 
-def categorie_image(request,categorie,index):
+def categorie_image(request,categorie,key):
+    index = get_object_or_404(models.Portfolio, categorie__categorie=categorie, image__key=key).index
     prev = models.Portfolio.objects.filter(categorie__categorie=categorie).order_by('-index')
     next = models.Portfolio.objects.filter(categorie__categorie=categorie).order_by('index')
 
     if prev.filter(index__lt=index):
-        prev = prev.filter(index__lt=index)[0]
+        prev = prev.filter(index__lt=index)[0].image.key
     else:
-        prev = prev[0]
+        prev = prev[0].image.key
+
     if next.filter(index__gt=index):
-        next = next.filter(index__gt=index)[0]
+        next = next.filter(index__gt=index)[0].image.key
     else:
-        next = next[0]
+        next = next[0].image.key
+        
     buyable = False
     obj = get_object_or_404(models.Portfolio, categorie__categorie=categorie, index=index)
     return render(request,'portfolios/single_image.html', locals())

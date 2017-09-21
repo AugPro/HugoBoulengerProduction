@@ -7,18 +7,19 @@ def home(request):
     object_list = models.Shop.objects.all()
     return render(request,'shop/shop.html', locals())
 
-def image(request,index):
+def image(request,key):
+    index = get_object_or_404(models.Shop, image__key=key).index
     prev = models.Shop.objects.order_by('-index')
     next = models.Shop.objects.order_by('index')
 
     if prev.filter(index__lt=index):
-        prev = prev.filter(index__lt=index)[0]
+        prev = prev.filter(index__lt=index)[0].image.key
     else:
-        prev = prev[0]
+        prev = prev[0].image.key
     if next.filter(index__gt=index):
-        next = next.filter(index__gt=index)[0]
+        next = next.filter(index__gt=index)[0].image.key
     else:
-        next = next[0]
+        next = next[0].image.key
     buyable = True
     obj = get_object_or_404(models.Shop, index=index)
     unit = 'cm'

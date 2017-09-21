@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class Shop(models.Model):
-    image = models.ForeignKey('DATA.Photo', unique = True)
+    image = models.OneToOneField('DATA.Photo')
     index = models.IntegerField(null=True,blank=True, unique= True)
     materials = models.ManyToManyField('Material')
     def __str__(self):

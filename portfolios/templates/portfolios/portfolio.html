@@ -11,7 +11,7 @@
     <div class="row">
         <ul class="portfolio">
             {% for object in object_list %}
-            <li><a href="{% url 'portfolios_categorie_image' categorie=object.categorie.categorie index=object.index %}"><img data-src="{{object.image.ld.url}}" width="{{object.image.ld.width}}" height="{{object.image.ld.height}}"></a></li>
+            <li><a href="{% url 'portfolios_categorie_image' categorie=object.categorie.categorie key=object.image.key %}"><img data-src="{{object.image.ld.url}}" width="{{object.image.ld.width}}" height="{{object.image.ld.height}}"></a></li>
             {% endfor %}
         </ul>
     </div>

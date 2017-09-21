@@ -12,7 +12,7 @@
         <div id="container">
             <div id="closing-button">
                 <a href="{% block close-url %}
-                    {% url "portfolios_categorie_all" categorie=portfolio.categorie %}
+                    {% url "portfolios_categorie_all" categorie=obj.categorie %}
                 {% endblock %}">
                     <button type="button" class="close" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -20,7 +20,7 @@
                 </a>
             </div>
             <a href="{% block left-url %}
-                {% url "portfolios_categorie_image" categorie=portfolio.categorie index=prev.index%}
+                {% url "portfolios_categorie_image" categorie=obj.categorie key=prev%}
             {% endblock %}">
                 <div id="left-block">
                     <span class=" glyphicon glyphicon-menu-left" aria-hidden="true"></span>
@@ -44,7 +44,7 @@
                 </div>
             </div>
             <a href="{% block right-url %}
-                {% url "portfolios_categorie_image" categorie=portfolio.categorie index=next.index%}
+                {% url "portfolios_categorie_image" categorie=obj.categorie key=next%}
             {% endblock %}">
                 <div id="right-block">
                     <span class=" glyphicon glyphicon-menu-right" aria-hidden="true"></span>
