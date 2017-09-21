@@ -236,6 +236,9 @@ a{
 
     .ignored-plus{
         line-height: inherit !important;
+        width: 100%;
+        height:100%;
+        display: block !important;
     }
 
     .glyphicon-search{
@@ -311,7 +314,7 @@ a{
         font-weight: lighter;
     }
 
-    .socials-container{
+    .soc-container{
         margin-left: auto;
         margin-right: auto;
         width:172px;

@@ -15,7 +15,7 @@
             {% block nav %}
             <div class="row">
                 <nav class="slideToggled">
-                    <a href="index.html">
+                    <a href="{% url "main_home" %}">
                         <div class="nav-img" style="background:url({% static "img/logo.png" %}) center center / contain no-repeat"></div>
                     </a>
                     <ul>
@@ -25,11 +25,11 @@
                         <li class="wrap">Videos
                                 {% include "videos/videos_sub_menu.html" %}
                         </li>
-                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="{% url "shop_home" %}">Shop</a></li>
                         <li class="wrap">About
                             <ul class="sub-menu">
                                 <li><a href="{% url "bio_home" %}">Bio</a></li>
-                                <li><a href="news.html">News</a></li>
+                                <li><a href="{% url "news_home" %}">News</a></li>
                             </ul>
                         </li>
                         <li class="wrap"> <span class="glyphicon glyphicon-plus ignored-plus" href="#"></span<>
