@@ -542,6 +542,9 @@ a{
     line-height: 1.5;
     color: white;
     text-align: justify;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .submit-contact {
@@ -922,3 +925,8 @@ gris foncé : #1F1F21
 gris clair : #2B2E30
 bleu material : #40C4FF
 */
+
+.errorlist > li{
+    font-family: AmericanCR;
+    list-style-type: none;
+}

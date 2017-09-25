@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'news',
     'shop',
     'home',
+    'subscribe',
 ]
 
 MIDDLEWARE = [
