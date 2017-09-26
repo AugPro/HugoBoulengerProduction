@@ -7,28 +7,25 @@
 </h1>
 <div class="row contact">
     <div class="col-sm-offset-2 col-sm-8">
-        <h2 class="contact-title">Pourquoi s'abonner ?</h2>
-        <p class="contact-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        <h2 class="contact-title">{{text.title}}</h2>
+        <p class="contact-content">{{text.text}}</p>
     </div>
 </div>
 <div class="row subscribe">
     <div class="col-sm-offset-4 col-sm-4 subscribe-form">
         <form class="contact-form" method="post">
             {% csrf_token %}
-            Adresse mail :<br>
-            {{form.email}}<br>
+            Your email adress :<br>
+            {{form.email}}
             {{form.email.errors}}
-            Nom :<br>
-            {{form.last_name}}<br>
-            {{form.last_name.errors}}
-            Prenom :<br>
-            {{form.first_name}}<br>
+            First name :<br>
+            {{form.first_name}}
             {{form.first_name.errors}}
-            <input type="submit" class="submit-contact submit-subscribe" name="submit-subscribe">
+            Last name :<br>
+            {{form.last_name}}
+            {{form.last_name.errors}}
+            <input type="submit" value="Submit" class="submit-contact submit-subscribe" name="submit-subscribe">
         </form>
-        {% if saved %}
-            {{validate}}
-        {% endif %}
 
     </div>
 </div>
