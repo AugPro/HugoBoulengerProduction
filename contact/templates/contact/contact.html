@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Contact{% endblock %}
+{% block content %}
+<h1 class="portfolio-title">
+    Contact
+</h1>
+<div class="row contact">
+    <div class="col-sm-offset-2 col-sm-8">
+        <h2 class="contact-title">What I do</h2>
+        <p class="contact-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    </div>
+    <div class="col-sm-offset-2 col-sm-8">
+        <h2 class="contact-title">Mail pro</h2>
+        <p class="contact-content">contact@hugoboulenger.com</p>
+    </div>
+</div>
+<div class="row contact">
+    <div class="col-sm-offset-2 col-sm-8">
+        <form class="contact-form" action="#" method="post">
+            {% csrf_token %}
+            Your email adress :<br>
+            {{form.email}}<br>
+            {{form.email.errors}}
+            Subject :<br>
+            {{form.subject}}<br>
+            {{form.subject.errors}}
+            Message :<br>
+            {{form.message}}<br>
+            {{form.message.errors}}
+            <input type="submit" class="submit-contact" name="submit-contact" value="Submit">
+        </form>
+    </div>
+</div>
+{% endblock %}

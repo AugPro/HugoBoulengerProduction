@@ -26,5 +26,6 @@ urlpatterns = [
     url(r'^shop/', include('shop.urls')),
     url(r'^about/news/', include('news.urls')),
     url(r'^subscribe/', include('subscribe.urls')),
+    url(r'^contact/', include('contact.urls')),
     url(r'^', include('home.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

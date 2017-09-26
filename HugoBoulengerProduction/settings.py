@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'shop',
     'home',
     'subscribe',
+    'contact',
 ]
 
 MIDDLEWARE = [
@@ -120,6 +121,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+EMAIL_HOST = 'smtp.hugoboulenger.com'
+EMAIL_HOST_USER = 'test@hugoboulenger.com'
+EMAIL_HOST_PASSWORD = 'lae3cestdeleau'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/

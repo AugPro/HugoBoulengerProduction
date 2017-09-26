@@ -1,4 +1,8 @@
 {% extends 'portfolios/single_image.html' %}
+{% endblock other-css %}
+    <link rel="stylesheet" href="{% static "css/cropper.css" %}">
+{% endblock %}
+
 {% block title %}Shop-{{image.image.title}}{% endblock %}
 
 {% block close-url %}
@@ -9,6 +13,108 @@
     {% url "shop_image" key=prev%}
 {% endblock %}
 
+{% block footer-right %}
+<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">
+    BUY
+</button>
+{% endblock %}
+
 {% block right-url %}
     {% url "shop_image" key=next%}
+{% endblock %}
+
+{% block modal %}
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body row">
+                <div class="col-sm-9 row" id="cropping-area">
+                    <div class="col-sm-11">
+                        <img src="{{obj.image.ld.url}}" class="center-block" id="image">
+                    </div>
+                    <div class="actions hidden-xs" id="actions-sm"> <!-- hidden-xs -->
+                        <span>
+                            <button class="btn btn-sm" onclick="menuOn('auth-form')">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                            </button>
+                            <button class="btn btn-sm" onclick="rotateCrop()">
+                                <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
+                                Rotate
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-3" id="selection-menu">
+                    <div class="actions" id="actions-xs"> <!--visible-xs -->
+                        <span>
+                            <button class="btn btn-sm" onclick="menuOn('auth-form')">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                            </button>
+                            <button class="btn btn-sm" onclick="rotateCrop()">
+                                <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
+                                Rotate
+                            </button>
+                        </span>
+                    </div>
+
+                    <div id="material-menu">
+                        <h2>Material Choice</h2>
+                        <ul id="material-list">
+
+                            {% for material in obj.materials.all %}
+                            <li class="material" onclick="menuOn('{{material}}')">
+                                {{material|title}}
+                                <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                            </li>
+                            {% endfor %}
+
+                        </ul>
+                    </div>
+
+                    {% for material in obj.materials.all %}
+                    <div class="size-menu" id="{{material}}">
+                        <h4 class="back-to-previous" onclick="menuOff('{{material}}')">
+                            <span class=" glyphicon glyphicon-menu-left" aria-hidden="true"></span> Materials
+                        </h4>
+                        <h2>Size Choice</h2>
+                        <ul>
+                            {% for size in material.sizes.all %}
+                            <li class="size" onclick="changeRatio({{size.width}}/{{size.height}})">
+                                {{size.width}} x {{size.height}}  {{unit}}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endfor %}
+
+                    <div id="auth-form">
+                        <h4 class="back-to-previous" onclick="menuOff('auth-form')">
+                            <span class=" glyphicon glyphicon-menu-left" aria-hidden="true"></span> Sizes
+                        </h4>
+                        <h2>User Info</h2>
+                        <div id="paypal-button"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block other-scripts %}
+<script src="{% static "js/modal-menus.js" %}" charset="utf-8"></script>
+<script src="{% static "js/cropper.js" %}"></script>
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<script src="{% static "js/payment.js" %}"></script>
 {% endblock %}
