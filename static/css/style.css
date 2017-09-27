@@ -611,7 +611,10 @@ a{
 SINGLE IMAGE DISPLAY
 --------------------*/
 #single-image-body{
-    background-color: #17171A;
+    background-color: #17171A !important;
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
 
 #container{
@@ -619,23 +622,26 @@ SINGLE IMAGE DISPLAY
     height:100%;
     width:100%;
     justify-content: center;
+    align-items: center;
     color:#B3B5BD;
 }
 
-#container > div, #container > a > div{
+/*#container > div, #container > a > div{
     position: absolute;
-}
+}*/
 
 #center-div{
-    max-width:90%;
-    height:100%;
-    background: no-repeat center center fixed;
+    max-width: 90%;
+    height: 100%;
     margin:auto;
-    display:flex;
-    flex-direction: column;
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    align-items:center;
+    justify-content:center;
 }
+
 #center-div img{
-    object-fit: contain;
     max-width: 100%;
     max-height: 100%;
     margin: auto;
@@ -651,12 +657,7 @@ SINGLE IMAGE DISPLAY
 
 #left-block, #right-block {
     font-size: 3em;
-    width:10%;
-    height:100%;
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    position:absolute;
+    position:fixed;
     z-index: 1;
     opacity:0.5;
 }
@@ -671,7 +672,6 @@ SINGLE IMAGE DISPLAY
 
 #right-block{
     right:0;
-    align-items: flex-end;
 }
 
 #image-footer{
@@ -680,7 +680,8 @@ SINGLE IMAGE DISPLAY
     align-items: center;
     background-color:rgba(23,23,26,0.84);
     width:100%;
-    position:absolute;
+    position: absolute;
+    width: 100%;
     bottom:0;
     padding: 0.9em 1.2em;
     z-index: 2;
@@ -900,15 +901,20 @@ h4.back-to-previous:hover{
 }*/
 
 #closing-button{
-    right:0;
+    position: fixed;
+    right:10px;
     top:0;
-    font-size:2em;
     z-index:2;
 }
 
 #closing-button > button{
     text-shadow: none;
-    opacity:0.5;
+}
+
+#closing-button .close {
+    opacity:1;
+    font-size:5em !important;
+    color: white;
 }
 
 #closing-button > button:hover{

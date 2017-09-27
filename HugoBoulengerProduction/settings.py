@@ -29,6 +29,7 @@ SECRET_KEY = 'b925)kstvtd!ssdnx1%pa78kuh=pwf(0(zynyb#+pk47(^7e%#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# TODO: Static problems on debug false
 
 ALLOWED_HOSTS = ['localhost']
 
@@ -147,3 +148,8 @@ STATICFILES_DIRS = [
 SCRIPTS_DIRS = [
     os.path.join(BASE_DIR, 'scripts'),
 ]
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)

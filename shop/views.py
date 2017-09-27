@@ -4,8 +4,13 @@ from . import models
 # Create your views here.
 def home(request):
     title = 'Shop'
+    # object_list = get_list_or_404(models.Shop)
     object_list = models.Shop.objects.all()
-    return render(request,'shop/shop.html', locals())
+    if object_list:
+        return render(request,'shop/shop.html', locals())
+    else:
+        return render(request,'shop/404.html', locals())
+
 
 def image(request,key):
     index = get_object_or_404(models.Shop, image__key=key).index
