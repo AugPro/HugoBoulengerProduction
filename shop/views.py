@@ -13,7 +13,8 @@ def home(request):
 
 
 def image(request,key):
-    index = get_object_or_404(models.Shop, image__key=key).index
+    image = get_object_or_404(models.Shop, image__key=key)
+    index = image.index
     prev = models.Shop.objects.order_by('-index')
     next = models.Shop.objects.order_by('index')
 
