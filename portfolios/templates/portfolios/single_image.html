@@ -5,7 +5,7 @@
         <meta charset="utf-8" name="viewport" content="width=device-width,initial-scale=1">
         <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css" %}">
         <link rel="stylesheet" href="{% static "css/style.css" %}">
-        {% endblock other-css %}{% endblock %}
+        {% block other-css %}{% endblock %}
         <title>{% block title %}Display-{{obj.image.title}}{% endblock %}</title>
     </head>
     <body id="single-image-body">
