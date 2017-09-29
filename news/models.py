@@ -1,4 +1,6 @@
 from django.db import models
+from django.dispatch import receiver
+import os
 
 # Create your models here.
 
@@ -10,3 +12,33 @@ class New(models.Model):
     content = models.TextField()
     def __str__(self):
         return self.title
+
+@receiver(models.signals.post_delete, sender=New)
+def auto_delete_file_on_delete(sender, instance, **kwargs):
+    """
+    Deletes file from filesystem
+    when corresponding `MediaFile` object is deleted.
+    """
+    if instance.img:
+        if os.path.isfile(instance.img.path):
+            os.remove(instance.img.path)
+
+@receiver(models.signals.pre_save, sender=New)
+def auto_delete_file_on_change(sender, instance, **kwargs):
+    """
+    Deletes old file from filesystem
+    when corresponding `MediaFile` object is updated
+    with new file.
+    """
+    if not instance.pk:
+        return False
+
+    try:
+        old_img = New.objects.get(pk=instance.pk).img
+    except MediaFile.DoesNotExist:
+        return False
+
+    new_img = instance.img
+    if not old_img == new_img:
+        if os.path.isfile(old_img.path):
+            os.remove(old_img.path)
