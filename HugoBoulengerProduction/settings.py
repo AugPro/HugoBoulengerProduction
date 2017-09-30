@@ -33,7 +33,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost']
 
-
+ADMINS = (
+    ('Boris Ghidaglia', 'boris.ghidaglia@edu.esiee.fr'),
+    ('Augustin Prolongeau', 'augustin.pro@gmail.com'),
+)
 # Application definition
 
 INSTALLED_APPS = [
@@ -121,6 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+SERVER_EMAIL = 'admin@hugoboulenger.com' # NOTE: Only for website error admin mails
 EMAIL_HOST = 'smtp.hugoboulenger.com'
 EMAIL_HOST_USER = 'test@hugoboulenger.com'
 EMAIL_HOST_PASSWORD = 'lae3cestdeleau'
