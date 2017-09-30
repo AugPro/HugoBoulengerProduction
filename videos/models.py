@@ -11,7 +11,7 @@ class Categorie(models.Model):
         super().save(*args,**kwargs)
 
 class Video(models.Model):
-    categorie = models.ForeignKey(Categorie)
+    categories = models.ManyToManyField(Categorie)
     url = models.URLField()
     key = models.TextField(unique=True)
     title = models.TextField(null=True)

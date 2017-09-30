@@ -4,6 +4,6 @@
 
 <ul class="sub-menu">
     {% for categorie in categories %}
-    <li><a href="{% url 'videos_by_categorie' categorie.categorie %}">{{ categorie.categorie }}</a></li>
+    <li><a href="{% url 'videos_by_categorie' categorie %}">{{ categorie }}</a></li>
     {% endfor %}
 </ul>
