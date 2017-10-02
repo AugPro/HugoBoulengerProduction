@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^paypal/', include('paypal.standard.ipn.urls')),
     url(r'^about/bio/', include('bio.urls')),
     url(r'^photos/', include('portfolios.urls')),
     url(r'^videos/', include('videos.urls')),
