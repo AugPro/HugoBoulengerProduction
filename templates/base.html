@@ -39,7 +39,10 @@
                             </ul>
                         </li>
                         <li><a class="glyphicon glyphicon-search" href="#"></a>
-                        <input type="text" name="search"></li>
+                            <form action="{% url 'portfolios_home' %}" method="get" style="display:inline-block;">
+                                <input type="text" name="search">
+                            </form>
+                        </li>
                     </ul>
                 </nav>
                 <div class="slide-img nav-img" style="background:url({% static "img/logo.png" %}) center center / contain no-repeat"></div>

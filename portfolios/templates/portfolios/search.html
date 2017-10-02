@@ -1,0 +1,21 @@
+{% extends 'portfolios/portfolio.html' %}
+{% load static %}
+{% block title %}Shop{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <h1 class="portfolio-title">
+            {{ title }}
+        </h1>
+        <h2 class="portfolio-subtitle">
+            <span class="glyphicon glyphicon-star-empty"></span>{{ sub_title }}<span class="glyphicon glyphicon-star-empty"></span>
+        </h2>
+    </div>
+    <div class="row">
+        <ul class="portfolio">
+            {% for object in object_list %}
+            <li><a href="{% url 'portfolios_categorie_image' categorie=object.categorie.categorie key=object.image.key %}"><img data-src="{{object.image.ld.url}}" width="{{object.image.ld.width}}" height="{{object.image.ld.height}}"></a></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
