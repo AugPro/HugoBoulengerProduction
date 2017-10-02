@@ -18,6 +18,7 @@ class PhotoAdmin(admin.ModelAdmin):
         return foo
     tags_tag.short_description = 'Tags'
     list_display= ['image_tag','title','date','tags_tag','key']
+    filter_horizontal = ('tags',) 
 
     def get_actions(self, request):
         actions = super().get_actions(request)
@@ -52,7 +53,9 @@ def make_add_photo_to_categorie_action(categorie):
 
     return add_photo_to_categorie
 
+class TagAdmin(admin.ModelAdmin):
+    ordering = ['tag']
 
 admin.site.register(models.Photo, PhotoAdmin)
-admin.site.register(models.Tag)
+admin.site.register(models.Tag,TagAdmin)
 admin.site.register(models.Social)
