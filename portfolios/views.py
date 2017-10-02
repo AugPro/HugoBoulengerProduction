@@ -4,18 +4,18 @@ from . import models
 # Create your views here.
 def home(request):
     title = 'Photos'
-    object_list = models.Portfolio.objects.all()
+    object_list = models.Photo.objects.all()
     return render(request,'portfolios/portfolio.html', locals())
 
 def categorie_all(request,categorie):
     title = categorie
-    object_list = get_list_or_404(models.Portfolio, categorie__categorie=categorie)
+    object_list = get_list_or_404(models.Photo, categorie__categorie=categorie)
     return render(request,'portfolios/portfolio.html', locals())
 
 def categorie_image(request,categorie,key):
-    index = get_object_or_404(models.Portfolio, categorie__categorie=categorie, image__key=key).index
-    prev = models.Portfolio.objects.filter(categorie__categorie=categorie).order_by('-index')
-    next = models.Portfolio.objects.filter(categorie__categorie=categorie).order_by('index')
+    index = get_object_or_404(models.Photo, categorie__categorie=categorie, image__key=key).index
+    prev = models.Photo.objects.filter(categorie__categorie=categorie).order_by('-index')
+    next = models.Photo.objects.filter(categorie__categorie=categorie).order_by('index')
 
     if prev.filter(index__lt=index):
         prev = prev.filter(index__lt=index)[0].image.key
@@ -28,5 +28,5 @@ def categorie_image(request,categorie,key):
         next = next[0].image.key
         
     buyable = False
-    obj = get_object_or_404(models.Portfolio, categorie__categorie=categorie, index=index)
+    obj = get_object_or_404(models.Photo, categorie__categorie=categorie, index=index)
     return render(request,'portfolios/single_image.html', locals())

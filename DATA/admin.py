@@ -1,6 +1,6 @@
 from django.contrib import admin
 from . import models
-from portfolios.models import Portfolio,Categorie
+from portfolios.models import Photo,Categorie
 from django.utils.html import format_html
 # Register your models here.
 
@@ -35,8 +35,8 @@ def make_add_photo_to_categorie_action(categorie):
     def add_photo_to_categorie(modeladmin, request, queryset):
         count = 0
         for photo in queryset:
-            if not Portfolio.objects.filter(image=photo,categorie=categorie).exists():
-                Portfolio(image=photo,categorie=categorie).save()
+            if not Photo.objects.filter(image=photo,categorie=categorie).exists():
+                Photo(image=photo,categorie=categorie).save()
                 count +=1
         if count==1:
             message_bit = "1 photo was"

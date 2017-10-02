@@ -6,7 +6,7 @@ import os
 
 class Bio(models.Model):
     """docstring for Bio."""
-    portrait = models.ForeignKey('Portrait')
+    portrait = models.ImageField(upload_to='bio/')
     subtitle = models.CharField(max_length=50)
     presentation = models.TextField()
     active = models.BooleanField()
@@ -25,24 +25,17 @@ class Bio(models.Model):
         super().save(*args, **kwargs)
 
 
-
-class Portrait(models.Model):
-    image = models.ImageField(upload_to='bio/')
-    def __str__(self):
-        return self.image.name.split('/')[1]
-
-
-@receiver(models.signals.post_delete, sender=Portrait)
+@receiver(models.signals.post_delete, sender=Bio)
 def auto_delete_file_on_delete(sender, instance, **kwargs):
     """
     Deletes file from filesystem
     when corresponding `MediaFile` object is deleted.
     """
-    if instance.image:
-        if os.path.isfile(instance.image.path):
-            os.remove(instance.image.path)
+    if instance.portrait:
+        if os.path.isfile(instance.portrait.path):
+            os.remove(instance.portrait.path)
 
-@receiver(models.signals.pre_save, sender=Portrait)
+@receiver(models.signals.pre_save, sender=Bio)
 def auto_delete_file_on_change(sender, instance, **kwargs):
     """
     Deletes old file from filesystem
@@ -53,11 +46,11 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
         return False
 
     try:
-        old_image = Portrait.objects.get(pk=instance.pk).image
+        old_image = Bio.objects.get(pk=instance.pk).portrait
     except MediaFile.DoesNotExist:
         return False
 
-    new_image = instance.image
+    new_image = instance.portrait
     if not old_image == new_image:
         if os.path.isfile(old_image.path):
             os.remove(old_image.path)

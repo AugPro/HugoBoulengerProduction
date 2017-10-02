@@ -7,7 +7,7 @@ class Categorie(models.Model):
     def __str__(self):
         return self.categorie
 
-class Portfolio(models.Model):
+class Photo(models.Model):
     categorie = models.ForeignKey(Categorie)
     image = models.ForeignKey('DATA.Photo')
     index = models.IntegerField(null=True)
