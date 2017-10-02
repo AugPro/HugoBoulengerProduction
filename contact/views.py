@@ -5,6 +5,7 @@ from . import forms, models
 
 def home(request):
     form = forms.ContactForm(request.POST or None)
+    text_list = models.Text.objects.all()
     if form.is_valid():
         send_mail(
             '[SERVEUR-CONTACT]-{}'.format(form.cleaned_data['subject']),

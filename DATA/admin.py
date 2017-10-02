@@ -45,7 +45,7 @@ def make_add_photo_to_categorie_action(categorie):
             message_bit = "{} photos were".format(count)
         modeladmin.message_user(
             request,
-            "{} photos was added to Categorie {}".format(message_bit,categorie)
+            "{} added to Categorie {}".format(message_bit,categorie)
         )
 
     add_photo_to_categorie.__name__ = "add_photo_to_{}".format(categorie)

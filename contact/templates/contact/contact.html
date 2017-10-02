@@ -5,14 +5,12 @@
     Contact
 </h1>
 <div class="row contact">
+    {% for text in text_list %}
     <div class="col-sm-offset-2 col-sm-8">
-        <h2 class="contact-title">What I do</h2>
-        <p class="contact-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        <h2 class="contact-title">{{text.title}}</h2>
+        <p class="contact-content">{{text.text}}</p>
     </div>
-    <div class="col-sm-offset-2 col-sm-8">
-        <h2 class="contact-title">Mail pro</h2>
-        <p class="contact-content">contact@hugoboulenger.com</p>
-    </div>
+    {% endfor %}
 </div>
 <div class="row contact">
     <div class="col-sm-offset-2 col-sm-8">
