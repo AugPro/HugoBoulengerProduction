@@ -10,15 +10,17 @@ def home(request):
         object_list = []
         for word in str(title).split(' '):
             object_list += models.Photo.objects.filter(image__tags__tag=word)
+            object_list += models.Photo.objects.filter(categorie__categorie=word)
+            object_list += models.Photo.objects.filter(image__title=word)
         return render(request, 'portfolios/search.html',locals())
     else:
         title = 'Photos'
-        object_list = models.Portfolio.objects.order_by('categorie','index')
+        object_list = models.Photo.objects.order_by('categorie','index')
         return render(request,'portfolios/portfolio.html', locals())
 
 def categorie_all(request,categorie):
     title = categorie
-    object_list = get_list_or_404(models.Portfolio.objects.order_by('index'), categorie__categorie=categorie)
+    object_list = get_list_or_404(models.Photo.objects.order_by('index'), categorie__categorie=categorie)
     return render(request,'portfolios/portfolio.html', locals())
 
 def categorie_image(request,categorie,key):
