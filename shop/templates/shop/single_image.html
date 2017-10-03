@@ -43,7 +43,7 @@
                     </div>
                     <div class="actions hidden-xs" id="actions-sm"> <!-- hidden-xs -->
                         <span>
-                            <button class="btn btn-sm" onclick="menuOn('auth-form')">
+                            <button class="btn btn-sm" onClick="post('{% url 'shop_payment' image.image.key %}')">
                                 <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                             </button>
                             <button class="btn btn-sm" onclick="rotateCrop()">
@@ -56,7 +56,7 @@
                 <div class="col-sm-3" id="selection-menu">
                     <div class="actions" id="actions-xs"> <!--visible-xs -->
                         <span>
-                            <button class="btn btn-sm" onclick="menuOn('auth-form')">
+                            <button class="btn btn-sm" onClick="post('{% url 'shop_payment' image.image.key %}')">
                                 <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                             </button>
                             <button class="btn btn-sm" onclick="rotateCrop()">
@@ -88,34 +88,24 @@
                         <h2>Size Choice</h2>
                         <ul>
                             {% for size in material.sizes.all %}
-                            <li class="size" onclick="changeRatio({{size.width}}/{{size.height}})">
+                            <li class="size" onclick="changeRatio({{size.width}},{{size.height}})">
                                 {{size.width}} x {{size.height}}  {{unit}}
                             </li>
                             {% endfor %}
                         </ul>
                     </div>
                     {% endfor %}
-
-                    <div id="auth-form">
-                        <h4 class="back-to-previous" onclick="menuOff('auth-form')">
-                            <span class=" glyphicon glyphicon-menu-left" aria-hidden="true"></span> Sizes
-                        </h4>
-                        <h2>User Info</h2>
-                        {{form.render}}
-                    </div>
-
                 </div>
             </div>
         </div>
-
     </div>
 </div>
-
+<form id="form">
+{% csrf_token %}
+</form>
 {% endblock %}
 
 {% block other-scripts %}
 <script src="{% static "js/modal-menus.js" %}" charset="utf-8"></script>
 <script src="{% static "js/cropper.js" %}"></script>
-<script src="https://www.paypalobjects.com/api/checkout.js"></script>
-<script src="{% static "js/payment.js" %}"></script>
 {% endblock %}

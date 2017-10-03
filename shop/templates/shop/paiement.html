@@ -1,0 +1,17 @@
+{% extends 'portfolios/portfolio.html' %}
+{% block title %}Paiement{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="big-text">
+                <h1>Thanks you for your support !</h1>
+                <h3>{{image.title}} - (before modifications)</h3>
+                <div class="center-block">
+                    <img src="{{image.ld.url}}" style="max-width:50%;max-height:20%;">
+                </div>
+                {{ form.render }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

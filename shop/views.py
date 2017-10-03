@@ -3,8 +3,10 @@ from django.shortcuts import render,redirect,reverse,get_object_or_404,get_list_
 from paypal.standard.forms import PayPalPaymentsForm
 from paypal.standard.models import ST_PP_COMPLETED
 from paypal.standard.ipn.signals import valid_ipn_received
+from django.utils.crypto import get_random_string
+from datetime import datetime
 from . import models
-
+import json
 # Create your views here.
 def home(request):
     title = 'Shop'
@@ -33,6 +35,33 @@ def image(request,key):
     obj = get_object_or_404(models.Shop, order=index)
     unit = 'cm'
     return render(request,'shop/single_image.html', locals())
+
+def payment(request, key):
+    cropper_data = json.loads(request.POST['cropper_data'])
+    size = json.loads(request.POST['size'])
+    material = request.POST['material']
+    image = get_object_or_404(models.Shop, image__key=key).image
+
+    amount = get_object_or_404(
+        models.Combination,
+        material__material=material,
+        size__width=size['width'],
+        size__height=size['height']
+    ).price
+    item_name = image.title
+    time = datetime.utcnow()
+    paypal_dict = {
+    "business": "augustin.pro-facilitator@gmail.com",
+    "amount": str(amount),
+    "currency_code": "EUR",
+    "item_name": item_name,
+    "invoice": "UTC--{}--{}".format(time,get_random_string()),
+    "notify_url": request.build_absolute_uri(reverse('paypal-ipn')),
+    "return_url": request.build_absolute_uri(reverse('main_home')),
+    "cancel_return": request.build_absolute_uri(reverse('main_home')),
+    }
+    form = PayPalPaymentsForm(initial=paypal_dict)
+    return render(request, "shop/paiement.html", {"form":form,"image":image})
 
 def show_me_the_money(sender, **kwargs):
     ipn_obj = sender
