@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'home',
     'subscribe',
     'contact',
+    'ordered_model',
 ]
 
 PAYPAL_TEST = True

@@ -1,11 +1,11 @@
 from django.contrib import admin
 from . import models
 from django.utils.html import format_html
+from ordered_model.admin import OrderedModelAdmin
 
 # Register your models here.
-class ShopAdmin(admin.ModelAdmin):
-    exclude=['index']
-    list_display = ['image_tag','material_list','index']
+class ShopAdmin(OrderedModelAdmin):
+    list_display = ['image_tag','material_list','move_up_down_links']
     def image_tag(self, shop):
         return format_html('<img src="{}" style="max-width:30%;max-height:30%"/>'.format(shop.image.ld.url))
     image_tag.short_description = 'Photo'

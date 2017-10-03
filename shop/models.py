@@ -1,19 +1,18 @@
 from django.db import models
+from ordered_model.models import OrderedModel
 
 # Create your models here.
 
-class Shop(models.Model):
+class Shop(OrderedModel):
     image = models.OneToOneField('DATA.Photo')
-    index = models.IntegerField(null=True,blank=True, unique= True)
     materials = models.ManyToManyField('Material')
+    moveTo = models.IntegerField(null=True)
     def __str__(self):
-        return '{} {}'.format(self.image,self.index)
-
+        return '{} {}'.format(self.image,self.order)
     def save(self, *args, **kwargs):
+        self.to(self.moveTo)
+        self.moveTo = None
         super().save(*args, **kwargs)
-        if not self.index:
-            self.index = self.id
-            super().save(*args, **kwargs)
 
 class Material(models.Model):
     material = models.CharField(max_length=30)
@@ -30,6 +29,6 @@ class Size(models.Model):
 class Combination(models.Model):
     material = models.ForeignKey('Material')
     size = models.ForeignKey('Size')
-    price = models.FloatField()
+    price = models.DecimalField(max_digits=7,decimal_places=2)
     def __str__(self):
         return '{}/{}'.format(self.material,self.size)

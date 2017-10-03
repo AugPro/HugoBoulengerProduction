@@ -17,35 +17,21 @@ def home(request):
 
 def image(request,key):
     image = get_object_or_404(models.Shop, image__key=key)
-    index = image.index
-    prev = models.Shop.objects.order_by('-index')
-    next = models.Shop.objects.order_by('index')
+    index = image.order
+    prev = models.Shop.objects.order_by('-order')
+    next = models.Shop.objects.order_by('order')
 
-    if prev.filter(index__lt=index):
-        prev = prev.filter(index__lt=index)[0].image.key
+    if prev.filter(order=index):
+        prev = prev.filter(order=index)[0].image.key
     else:
         prev = prev[0].image.key
-    if next.filter(index__gt=index):
-        next = next.filter(index__gt=index)[0].image.key
+    if next.filter(order=index):
+        next = next.filter(order=index)[0].image.key
     else:
         next = next[0].image.key
     buyable = True
-    obj = get_object_or_404(models.Shop, index=index)
+    obj = get_object_or_404(models.Shop, order=index)
     unit = 'cm'
-
-    paypal_dict = {
-        "business": "augustin.pro-facilitator@gmail.com",
-        "amount": "10.00",
-        "currency_code": "EUR",
-        "item_name": "name of the item",
-        "invoice": "unique-invoice-id",
-        "notify_url": request.build_absolute_uri(reverse('paypal-ipn')),
-        "return_url": redirect('vps461005.ovh.net'),
-        # "return_url": request.build_absolute_uri(reverse('main_home')),
-        # "cancel_return": request.build_absolute_uri(reverse('main_home')),
-        "cancel_return": redirect('vps461005.ovh.net'),
-    }
-    form = PayPalPaymentsForm(initial=paypal_dict)
     return render(request,'shop/single_image.html', locals())
 
 def show_me_the_money(sender, **kwargs):
