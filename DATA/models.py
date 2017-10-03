@@ -15,7 +15,7 @@ class Tag(models.Model):
 
 class Photo(models.Model):
     """docstring for Photo."""
-    hd = models.ImageField(upload_to='DATA/hd/', verbose_name='Photo haute définition')
+    hd = models.ImageField(upload_to='DATA/6uAMWzx1Vy/', verbose_name='Photo haute définition')
     ld = models.ImageField(upload_to='DATA/ld/', verbose_name='Photo basse définition')
     key = models.CharField(max_length=16, blank=True, unique=True)
     title = models.CharField(max_length=40, default='')
