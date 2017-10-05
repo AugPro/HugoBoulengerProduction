@@ -6,7 +6,7 @@ from ordered_model.models import OrderedModel
 class Shop(OrderedModel):
     image = models.OneToOneField('DATA.Photo')
     materials = models.ManyToManyField('Material')
-    moveTo = models.IntegerField(null=True)
+    moveTo = models.IntegerField(null=True, blank=True)
     def __str__(self):
         return '{} {}'.format(self.image,self.order)
     def save(self, *args, **kwargs):

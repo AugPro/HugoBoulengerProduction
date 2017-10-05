@@ -1,12 +1,17 @@
 from django.db import models
 from django.dispatch import receiver
+from django.utils.crypto import get_random_string
 import os
 
 # Create your models here.
 
+def file_path(instance, filename):
+    name = '{}.{}'.format(get_random_string(),filename.split('.')[-1])
+    return 'news/{}'.format(name)
+
 class New(models.Model):
     title = models.CharField(max_length=30)
-    img = models.ImageField(upload_to='news/')
+    img = models.ImageField(upload_to=file_path)
     url_txt = models.CharField(max_length=100)
     url = models.URLField()
     content = models.TextField()

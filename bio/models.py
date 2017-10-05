@@ -1,12 +1,17 @@
 from django.db import models
 from django.dispatch import receiver
 from django.utils.text import Truncator
+from django.utils.crypto import get_random_string
 import string
 import os
 
+def file_path(instance, filename):
+    name = '{}.{}'.format(get_random_string(),filename.split('.')[-1])
+    return 'bio/{}'.format(name)
+
 class Bio(models.Model):
     """docstring for Bio."""
-    portrait = models.ImageField(upload_to='bio/')
+    portrait = models.ImageField(upload_to=file_path)
     subtitle = models.CharField(max_length=50)
     presentation = models.TextField()
     active = models.BooleanField()

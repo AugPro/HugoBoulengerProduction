@@ -13,16 +13,24 @@ class Tag(models.Model):
         self.tag = unidecode(self.tag.lower())
         super().save(*args, **kwargs)
 
+def ld_path(instance, filename):
+    name = '{}.{}'.format(get_random_string(),filename.split('.')[-1])
+    return 'DATA/ld/{}'.format(name)
+
+def hd_path(instance, filename):
+    name = '{}.{}'.format(get_random_string(),filename.split('.')[-1])
+    return 'DATA/hd/{}'.format(name)
+
 class Photo(models.Model):
     """docstring for Photo."""
-    hd = models.ImageField(upload_to='DATA/6uAMWzx1Vy/', verbose_name='Photo haute définition')
-    ld = models.ImageField(upload_to='DATA/ld/', verbose_name='Photo basse définition')
+    hd = models.ImageField(upload_to=hd_path, verbose_name='Photo haute définition')
+    ld = models.ImageField(upload_to=ld_path, verbose_name='Photo basse définition')
     key = models.CharField(max_length=16, blank=True, unique=True)
     title = models.CharField(max_length=40, default='')
     tags = models.ManyToManyField(Tag)
     date = models.DateField(auto_now_add=True)
     def __str__(self):
-        return self.hd.name
+        return self.title
     def save(self, *args, **kwargs):
         # attrib random key
         self.key = get_random_string(length=16)
