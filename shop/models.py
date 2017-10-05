@@ -10,7 +10,8 @@ class Shop(OrderedModel):
     def __str__(self):
         return '{} {}'.format(self.image,self.order)
     def save(self, *args, **kwargs):
-        self.to(self.moveTo)
+        if self.moveTo:
+            self.to(self.moveTo)
         self.moveTo = None
         super().save(*args, **kwargs)
 

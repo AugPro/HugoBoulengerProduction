@@ -81,3 +81,5 @@ class Social(models.Model):
     insta = models.URLField()
     twitter= models.URLField()
     yt = models.URLField()
+    def __str__(self):
+        return 'Socials'

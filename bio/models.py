@@ -20,12 +20,9 @@ class Bio(models.Model):
         return Truncator(self.presentation).chars(75)
     def save(self, *args, **kwargs):
         if self.active:
-            bios = Bio.objects.filter(active=True)
-            for elt in bios:
-                elt.active = False
-                elt.save()
+            Bio.objects.filter(active=True).update(active=False)
         else:
-            if not Bio.objects.exclude(id=self.id).filter(active=True).exists():
+            if not Bio.objects.exclude(pk=self.pk).filter(active=True).exists():
                 self.active = True
         super().save(*args, **kwargs)
 

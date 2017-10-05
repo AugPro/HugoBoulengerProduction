@@ -1,4 +1,5 @@
 from django.db import models
+from ordered_model.models import OrderedModel
 
 # Create your models here.
 
@@ -7,18 +8,16 @@ class Categorie(models.Model):
     def __str__(self):
         return self.categorie
 
-class Photo(models.Model):
+class Photo(OrderedModel):
     categorie = models.ForeignKey(Categorie)
     image = models.ForeignKey('DATA.Photo')
-    index = models.IntegerField(null=True)
+    moveTo = models.IntegerField(null=True, blank=True)
     def __str__(self):
-        return '{}/{}'.format(self.categorie,self.image)
-
+        return '{} {}'.format(self.image,self.order)
     def save(self, *args, **kwargs):
+        if self.moveTo:
+            self.to(self.moveTo)
+        self.moveTo = None
         super().save(*args, **kwargs)
-        if not self.index:
-            self.index = self.id
-            super().save(*args, **kwargs)
-
     class Meta:
-        unique_together = (('categorie','image'),('categorie','index'))
+        unique_together = (('categorie','image'),)

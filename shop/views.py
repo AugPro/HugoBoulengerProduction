@@ -33,7 +33,19 @@ def image(request,key):
         next = next[0].image.key
     buyable = True
     obj = get_object_or_404(models.Shop, order=index)
-    unit = 'cm'
+    material_dict = {}
+    for material in obj.materials.all():
+        material_dict[str(material)] = {}
+        for size in material.sizes.all():
+            material_dict[str(material)][str(size)] = {
+                'width' : size.width,
+                'height' : size.height,
+                'price' : get_object_or_404(
+                    models.Combination,
+                    material = material,
+                    size = size
+                ).price
+            }
     return render(request,'shop/single_image.html', locals())
 
 def payment(request, key):
@@ -90,7 +102,7 @@ def show_me_the_money(sender, **kwargs):
     #         ...
     # else:
     #     #...
-    content+="\n\n{}".format(ipb_obj)
+    content+="\n\n{}".format(ipn_obj)
     send_mail(
         '[SERVEUR-CONTACT]',
         content,

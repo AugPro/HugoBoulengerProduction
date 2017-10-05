@@ -62,7 +62,7 @@ a{
 
 /* NAVBAR PC*/
 
-@media (min-width: 767px) {
+@media (min-width: 768px) {
 
     nav{
         position: fixed;
@@ -250,7 +250,7 @@ a{
     }
 
     nav input[type=text]{
-        width:60%;
+        width:100%;
         display: none;
         background-color: transparent;
         border: none;
