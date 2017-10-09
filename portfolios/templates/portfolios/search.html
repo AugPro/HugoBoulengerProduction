@@ -12,10 +12,18 @@
         </h2>
     </div>
     <div class="row">
+        {% for object in object_list %}
+        {% if forloop.first %}
         <ul class="portfolio">
-            {% for object in object_list %}
+        {% endif %}
             <li><a href="{% url 'portfolios_categorie_image' categorie=object.categorie.categorie key=object.image.key %}"><img data-src="{{object.image.ld.url}}" width="{{object.image.ld.width}}" height="{{object.image.ld.height}}"></a></li>
-            {% endfor %}
+        {% if forloop.last %}
         </ul>
+        {% endif %}
+        {% empty %}
+            <div class='big-text'>
+                <h1>Nothing was found for "{{title}}"</h1>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}

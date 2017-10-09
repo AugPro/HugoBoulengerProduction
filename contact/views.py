@@ -14,5 +14,5 @@ def home(request):
             # TODO: change email to hugo's
             ['augustin.junk@gmail.com','boris.ghidaglia@edu.esiee.fr'],
         )
-        return redirect('main_home')
+        return render(request,'contact/sent.html')
     return render(request, 'contact/contact.html', locals())

@@ -49,66 +49,85 @@ def image(request,key):
     return render(request,'shop/single_image.html', locals())
 
 def payment(request, key):
-    cropper_data = json.loads(request.POST['cropper_data'])
-    size = json.loads(request.POST['size'])
-    material = request.POST['material']
-    image = get_object_or_404(models.Shop, image__key=key).image
+    cropper_data = request.POST.get('cropper_data')
+    size = json.loads(request.POST.get('size'))
+    material = request.POST.get('material')
+    shop = get_object_or_404(models.Shop, image__key=key)
+    image=shop.image
 
-    amount = get_object_or_404(
+    time = datetime.utcnow()
+    invoice = "UTC--{}--{}".format(time,get_random_string())
+    combination = get_object_or_404(
         models.Combination,
         material__material=material,
         size__width=size['width'],
         size__height=size['height']
-    ).price
+    )
+    models.Payment(invoice= invoice, image= shop, combination= combination, cropper_data= cropper_data).save()
+    amount = combination.price
     item_name = image.title
-    time = datetime.utcnow()
+
     paypal_dict = {
     "business": "augustin.pro-facilitator@gmail.com",
     "amount": str(amount),
     "currency_code": "EUR",
+    "no_shipping": "2",
     "item_name": item_name,
-    "invoice": "UTC--{}--{}".format(time,get_random_string()),
+    "invoice": invoice,
     "notify_url": request.build_absolute_uri(reverse('paypal-ipn')),
-    "return_url": request.build_absolute_uri(reverse('main_home')),
-    "cancel_return": request.build_absolute_uri(reverse('main_home')),
+    "return_url": request.build_absolute_uri(reverse('shop_after_payment')),
+    "cancel_return": request.build_absolute_uri(reverse('shop_image',kwargs={"key":key})),
     }
     form = PayPalPaymentsForm(initial=paypal_dict)
     return render(request, "shop/paiement.html", {"form":form,"image":image})
 
 def show_me_the_money(sender, **kwargs):
     ipn_obj = sender
+    payment = models.Payment.objects.get(invoice=ipn_obj.invoice)
+    payment.txn_id = ipn_obj.txn_id
+    payment.address = address
+    payment.email = ipn_obj.payer_email
+    payment.save()
     content= ""
-    if ipn_obj.payment_status == ST_PP_COMPLETED:
-        content+="payment status : {}\n".format(ipn_obj.payment_status)
-        # WARNING !
-        # Check that the receiver email is the same we previously
-        # set on the `business` field. (The user could tamper with
-        # that fields on the payment form before it goes to PayPal)
-        if ipn_obj.receiver_email != "augustin.pro-facilitator@gmail.com":
-            # Not a valid payment
-            content += "wrong email : {}\n".format(ipn_obj.receiver_email)
+    content+="Payment status : {}\n\n".format(ipn_obj.payment_status or " ")
 
-        # ALSO: for the same reason, you need to check the amount
-        # received, `custom` etc. are all what you expect or what
-        # is allowed.
+    content+="A payment of {amount} {currency_code} was made to {email} for {name}\n\n".format(
+        amount = ipn_obj.mc_gross or " ",
+        currency_code = ipn_obj.mc_currency or " ",
+        email= ipn_obj.receiver_email or " ",
+        name= ipn_obj.item_name or " ",
+    )
 
-        # Undertake some action depending upon `ipn_obj`.
-        # if ipn_obj.custom == "premium_plan":
-        #     price = ...
-        # else:
-        #     price = ...
+    content+="Planned price for this item: {}\n".format(payment.combination.price or "")
 
-    #     if ipn_obj.mc_gross == price and ipn_obj.mc_currency == 'USD':
-    #         ...
-    # else:
-    #     #...
-    content+="\n\n{}".format(ipn_obj)
+    content+="Payment invoice : {}\n Payment Payment ID : {}\n\n".format(ipn_obj.invoice,ipn_obj.txn_id or " ")
+
+    address = '{street} {city}, {zip}, {country}'.format(
+        street = ipn_obj.address_street or " ",
+        city = ipn_obj.address_city or " ",
+        zip = ipn_obj.address_zip or " ",
+        country = ipn_obj.address_country or " ",
+    )
+    content+="USER INFORMATION:\n\
+        first and last name: {first} {last}\n\
+        email-adress: {email}\n\
+        Phone number : {phone}\n\
+        adress:{street} {city}, {zip}, {country}\n".format(
+            email = ipn_obj.payer_email or " ",
+            first = ipn_obj.first_name or " ",
+            last = ipn_obj.last_name or " ",
+            address = address,
+            phone = ipn_obj.contact_phone or " ",
+    )
+
     send_mail(
-        '[SERVEUR-CONTACT]',
+        '[SERVEUR-PAYMENT]-{}'.format(ipn_obj.txn_id or " "),
         content,
         'test@hugoboulenger.com',
         # TODO: change email to hugo's
-        ['augustin.junk@gmail.com','boris.ghidaglia@edu.esiee.fr'],
+        ['augustin.pro@gmail.com'],
     )
-
 valid_ipn_received.connect(show_me_the_money)
+
+def after_payment(request):
+    return render(request,'shop/return.html')

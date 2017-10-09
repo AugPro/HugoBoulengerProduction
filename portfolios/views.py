@@ -8,10 +8,14 @@ def home(request):
         title = request.GET.get("search")
         sub_title = "Search Result"
         object_list = []
+        object_list += models.Photo.objects.filter(image__tags__tag__iexact=title)
+        object_list += models.Photo.objects.filter(categorie__categorie__iexact=title)
+        object_list += models.Photo.objects.filter(image__title__iexact=title)
         for word in str(title).split(' '):
-            object_list += models.Photo.objects.filter(image__tags__tag=word)
-            object_list += models.Photo.objects.filter(categorie__categorie=word)
-            object_list += models.Photo.objects.filter(image__title=word)
+            object_list += models.Photo.objects.filter(image__tags__tag__iexact=word)
+            object_list += models.Photo.objects.filter(categorie__categorie__iexact=word)
+            object_list += models.Photo.objects.filter(image__title__iexact=word)
+        object_list = list(set(object_list))
         return render(request, 'portfolios/search.html',locals())
     else:
         title = 'Photos'

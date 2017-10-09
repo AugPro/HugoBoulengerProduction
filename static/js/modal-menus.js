@@ -11,7 +11,6 @@ function menuOn(id) {
 }
 
 function menuOff(id) {
-    material = null;
     destroyCropper();
     element = document.getElementById(id);
     element.style.left='100%';
@@ -37,7 +36,6 @@ function destroyCropper() {
     if(isCropperPresent()){
         cropper.destroy();
     }
-    size = null;
     actionsxs.classList.remove('visible-xs');
     actionssm.style.display="";
 }
