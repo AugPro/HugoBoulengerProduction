@@ -68,7 +68,7 @@ def payment(request, key):
     item_name = image.title
 
     paypal_dict = {
-    "business": "augustin.pro-facilitator@gmail.com",
+    "business": "", #TODO: enter paypal business email address
     "amount": str(amount),
     "currency_code": "EUR",
     "no_shipping": "2",
@@ -123,7 +123,7 @@ def show_me_the_money(sender, **kwargs):
     send_mail(
         '[SERVEUR-PAYMENT]-{}'.format(ipn_obj.txn_id or " "),
         content,
-        'test@hugoboulenger.com',
+        'payment@hugoboulenger.com',
         # TODO: change email to hugo's
         ['augustin.pro@gmail.com'],
     )

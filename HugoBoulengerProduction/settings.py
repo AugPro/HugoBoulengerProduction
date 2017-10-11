@@ -60,8 +60,6 @@ INSTALLED_APPS = [
     'ordered_model',
 ]
 
-PAYPAL_TEST = True
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -140,8 +138,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 SERVER_EMAIL = 'admin@hugoboulenger.com' # NOTE: Only for website error admin mails
 EMAIL_HOST = 'smtp.hugoboulenger.com'
-EMAIL_HOST_USER = 'test@hugoboulenger.com'
-EMAIL_HOST_PASSWORD = 'lae3cestdeleau'
+EMAIL_HOST_USER = config.EMAIL_USER
+EMAIL_HOST_PASSWORD = config.EMAIL_PW
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 

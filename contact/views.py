@@ -10,7 +10,7 @@ def home(request):
         send_mail(
             '[SERVEUR-CONTACT]-{}'.format(form.cleaned_data['subject']),
             'email from {}:\n\n{}'.format(form.cleaned_data['email'],form.cleaned_data['message']),
-            'test@hugoboulenger.com',
+            'contact@hugoboulenger.com',
             # TODO: change email to hugo's
             ['augustin.junk@gmail.com','boris.ghidaglia@edu.esiee.fr'],
         )
